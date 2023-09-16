@@ -10,22 +10,19 @@ const Navbar = ({ isLoggedIn, handleOnLogin }) => {
   const pathname = useLocation().pathname
 
 
-  // @todo: Remove this useEffect, just for testing...
-  useEffect(() => {
-    console.log(pathname)
-  }, [pathname])
-
   return (
     <nav className='flex py-6 justify-between items-center navbar m-0'>
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
-        {navLinks.map((nav) => (
           <li
-            key={nav.id}
-            className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/${nav.id}` ? 'text-teal-400' : 'text-dimWhite'}`}
+            className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/` ? 'text-teal-400' : 'text-dimWhite'}`}
           >
-            <Link to={`/${nav.id}`}>{nav.title}</Link>
+            <Link to={`/`}>Home</Link>
           </li>
-        ))}
+        <li
+          className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/favorites` ? 'text-teal-400' : 'text-dimWhite'}`}
+        >
+          {isLoggedIn && <Link to={`/favorites`}>Favorites</Link>}
+        </li>
       </ul>
       <div className='sm:flex hidden'>
         {!isLoggedIn && <Button text='Login' handleOnClick={handleOnLogin} />}

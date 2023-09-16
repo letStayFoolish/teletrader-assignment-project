@@ -5,9 +5,6 @@ import {useEffect, useState} from "react";
 import {fetchFirst5Symbols} from "../../utils/api";
 
 const App = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(
-  //   localStorage.getItem('isLoggedIn') === true
-  // )
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const handleOnLogin = () => {
