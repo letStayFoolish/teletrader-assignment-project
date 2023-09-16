@@ -16,10 +16,6 @@ const App = () => {
     setIsLoggedIn(localStorage.getItem('isLoggedIn'))
   }, [isLoggedIn])
 
-  useEffect(() => {
-    fetchFirst5Symbols()
-  }, []);
-
 
   return (
     <div

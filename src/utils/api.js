@@ -7,7 +7,22 @@ export const fetchFirst5Symbols = async () => {
 
     if (response.status === 200) {
       const symbols = response.data.slice(0, 5)
-      console.log('First 5 symbols', symbols)
+      return symbols
+    } else {
+      console.error('Failed to fetch data: ', response.status, response.statusText)
+    }
+
+  } catch (error) {
+    console.error(`Error: ${error.message}`)
+  }
+}
+
+export const fetchSymbolData = async ({ symbol }) => {
+  try {
+    const response = await axios.get(`https://api.bitfinex.com/v1/pubticker/${symbol}`)
+
+    if (response.status === 200) {
+      return response
     } else {
       console.error('Failed to fetch data: ', response.status, response.statusText)
     }

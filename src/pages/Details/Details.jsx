@@ -2,8 +2,13 @@ import React, {useState} from 'react'
 import icon from "../../assets/Icons/icon-01.png";
 import {currencyItems} from '../../utils/constants'
 import Button from "../../components/Button/Button";
-const Details = () => {
+const Details = ({ isLoggedIn }) => {
   const [removeFromFavorites, setRemoveFromFavorites] = useState(true)
+  const [favorites, setFavorites] = useState(false)
+
+  const handleFavorites = () => {
+    setFavorites(!favorites)
+  }
 
   return (
     <section>
@@ -33,8 +38,8 @@ const Details = () => {
           </div>
         </div>
       </div>
-      <Button text='Add to favorites' />
-      <Button text='Remove from favorites' remove={removeFromFavorites} />
+      {isLoggedIn && !favorites && <Button text='Add to favorites' handleOnClick={handleFavorites} />}
+      {isLoggedIn && favorites && <Button text='Remove from favorites' remove={removeFromFavorites} handleOnClick={handleFavorites} />}
     </section>
   )
 }

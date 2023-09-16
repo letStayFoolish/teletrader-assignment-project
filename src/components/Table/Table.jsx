@@ -1,7 +1,15 @@
 import React from 'react'
 import {currencyItems} from '../../utils/constants'
-import icon from '../../assets/Icons/icon-01.png'
-const Table = () => {
+import {useNavigate} from "react-router-dom";
+
+const Table = ({ cryptoData, cryptoNames, resultsLoaded }) => {
+  const navigate = useNavigate()
+  const handleOnClick = (symbol) => {
+    navigate(`/details/${symbol}`)
+    console.log(symbol)
+  }
+
+
   return (
   <div className="flex flex-col">
     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -19,11 +27,15 @@ const Table = () => {
             </tr>
             </thead>
             <tbody>
-            {currencyItems.map((item, _index) => (
-              <tr key={_index} className="border-b dark:border-neutral-500 cursor-pointer hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
-                <td className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center">
-                  <img src={icon} alt="Currency logo" className='object-contain h-[25px] w-[25px]'/>
-                  {item.name}</td>
+            {currencyItems?.map((item, _index) => (
+              <tr
+                onClick={() => handleOnClick(item.name)}
+                key={_index}
+                className="border-b dark:border-neutral-500 cursor-pointer hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
+                <td
+
+                  className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center"
+                >{item.name}</td>
                 <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{item.last}</td>
                 <td className="whitespace-nowrap px-6 py-4 hidden sm:table-cell">{item.change}</td>
                 <td className={`whitespace-nowrap px-6 py-4 hidden sm:table-cell ${item.changePercent > 0 ? 'text-green-800' : 'accent-red-800' } `}>{item.changePercent}</td>
