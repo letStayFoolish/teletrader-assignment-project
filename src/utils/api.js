@@ -1,26 +1,18 @@
 import {BASE_URL} from "./constants";
+import axios from "axios";
 
-const checkResponse = async (res) => {
-  if (res.ok) {
-    return await res.json()
-  } else {
-    throw new Error(`Error: ${res.status}`)
-  }
-}
-
-export const getSymbols = async () => {
+export const fetchFirst5Symbols = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/v1/symbols`, {
-      method: 'GET',
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }
-    })
+    const response = await axios.get(`${BASE_URL}/v1/symbols`)
 
-    return await checkResponse(response)
+    if (response.status === 200) {
+      const symbols = response.data.slice(0, 5)
+      console.log('First 5 symbols', symbols)
+    } else {
+      console.error('Failed to fetch data: ', response.status, response.statusText)
+    }
 
-  } catch (err) {
-    console.error(err)
+  } catch (error) {
+    console.error(`Error: ${error.message}`)
   }
 }

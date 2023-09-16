@@ -2,7 +2,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import {useEffect, useState} from "react";
-import {getSymbols} from "../../utils/api";
+import {fetchFirst5Symbols} from "../../utils/api";
 
 const App = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(
@@ -20,20 +20,9 @@ const App = () => {
   }, [isLoggedIn])
 
   useEffect(() => {
-    // handleGetData()
+    fetchFirst5Symbols()
   }, []);
 
-  const handleGetData = async () => {
-    const data = await getSymbols()
-    // const result = []
-    //
-    // for (let i = 0; i < 5; i++) {
-    //   result.push(data[i])
-    // }
-    //
-    // return result
-    return data
-  }
 
   return (
     <div
