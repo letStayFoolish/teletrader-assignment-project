@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react'
 import Button from "../../components/Button/Button";
 import {useParams} from "react-router-dom";
 import {fetchSymbolData} from "../../utils/api";
-import {formatNumber} from "../../utils/utils";
+import {formatNumber, handleGetFromLocalStorage, handleSaveToLocalStorage} from "../../utils/utils";
 const Details = ({ isLoggedIn }) => {
   const [removeFromFavorites, setRemoveFromFavorites] = useState(true)
-  const [favorites, setFavorites] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [favoriteList, setFavoriteList] = useState([])
   const [fixedCryptoData, setFixedCryptoData] = useState({
     last: 0,
     high: 0,
@@ -13,10 +14,6 @@ const Details = ({ isLoggedIn }) => {
   })
 
   let { symbol } = useParams()
-
-  const handleFavorites = () => {
-    setFavorites(!favorites)
-  }
 
   const handleFetchData = async () => {
     const response = await fetchSymbolData(symbol)
@@ -30,10 +27,41 @@ const Details = ({ isLoggedIn }) => {
     })
   }
 
+  const handleAddToFavorites = () => {
+    setIsFavorite(true)
+    // setFavoriteList([symbol, ...favoriteList])
+    handleSaveToLocalStorage('symbol', [...favoriteList, symbol]) // OK !!!
 
+    const dataFromLocalStorage =  handleGetFromLocalStorage('symbol')
+
+    setFavoriteList(dataFromLocalStorage)
+
+    console.log(dataFromLocalStorage)
+  }
+
+
+  const handleRemoveFromFavorites = () => {
+    setIsFavorite(false)
+    const itemToDelete = symbol
+
+    if (favoriteList.length) {
+      handleSaveToLocalStorage('symbol', favoriteList.filter((item) => item !== itemToDelete))
+      setFavoriteList(favoriteList.filter((item) => item !== itemToDelete))
+    }
+
+  }
 
   useEffect(() => {
     handleFetchData()
+    const data = handleGetFromLocalStorage('symbol')
+
+    if (data.includes(symbol)) {
+      setIsFavorite(true)
+    } else {
+      setIsFavorite(false)
+    }
+
+    setFavoriteList(data)
   }, []);
 
   return (
@@ -62,8 +90,8 @@ const Details = ({ isLoggedIn }) => {
           </div>
         </div>
       </div>
-      {isLoggedIn && !favorites && <Button text='Add to favorites' handleOnClick={handleFavorites} />}
-      {isLoggedIn && favorites && <Button text='Remove from favorites' remove={removeFromFavorites} handleOnClick={handleFavorites} />}
+      {isLoggedIn && !isFavorite && <Button text='Add to favorites' handleOnClick={handleAddToFavorites} />}
+      {isLoggedIn && isFavorite && <Button text='Remove from favorites' remove={removeFromFavorites} handleOnClick={handleRemoveFromFavorites} />}
     </section>
   )
 }

@@ -4,6 +4,8 @@ import WebSocket from "websocket";
 const useUpdatingData = (symbols) => {
   const [cryptoData, setCryptoData] = useState([])
   const [cryptoNames, setCryptoNames] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const handleInitialData = (data) => {
     const { chanId: id, pair: crypto } = data
@@ -49,6 +51,8 @@ const useUpdatingData = (symbols) => {
       return
     }
 
+    setIsLoading(true)
+
     const ws = new WebSocket.w3cwebsocket('wss://api-pub.bitfinex.com/ws/2')
 
     ws.onopen = () => {
@@ -70,6 +74,8 @@ const useUpdatingData = (symbols) => {
       } else if (Array.isArray(data) && data[1].length === 10) {
         handleUpdateData(data)
       }
+      setIsLoading(false)
+
       // console.log(data)
     }
 
@@ -83,7 +89,7 @@ const useUpdatingData = (symbols) => {
 
   }, [symbols]);
 
-  return { cryptoData, cryptoNames }
+  return { cryptoData, cryptoNames, isLoading }
 }
 
 export default useUpdatingData;

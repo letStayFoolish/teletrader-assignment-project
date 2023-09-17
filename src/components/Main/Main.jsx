@@ -6,6 +6,7 @@ import Favorites from "../../pages/Favorits/Favorites";
 import Details from "../../pages/Details/Details";
 import {fetchFirst5Symbols} from "../../utils/api";
 import useUpdatingData from "../../hooks/useUpdatingData";
+import NotFound from "../NotFound/NotFound";
 
 const Main = ({ isLoggedIn }) => {
 
@@ -17,7 +18,7 @@ const Main = ({ isLoggedIn }) => {
           <ProtectedRoute isLoggedIn={isLoggedIn} element={Favorites} />
         }/>
         <Route path='/details/:symbol' element={<Details isLoggedIn={isLoggedIn} />} />
-        <Route path='*' element={<Navigate to='/' />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </main>
   )

@@ -5,7 +5,7 @@ import useUpdatingData from "../../hooks/useUpdatingData";
 
 const Home = () => {
   const [symbols, setSymbols] = useState([])
-  const { cryptoData, cryptoNames } = useUpdatingData(symbols)
+  const { cryptoData, cryptoNames, isLoading } = useUpdatingData(symbols)
 
   const handleGetSymbols = async () => {
     try {
@@ -15,6 +15,7 @@ const Home = () => {
 
     } catch (error) {
       console.error('Error:', error.message)
+    } finally {
     }
   }
 
@@ -24,7 +25,7 @@ const Home = () => {
 
   return (
     <section className='my-[120px]'>
-      <Table cryptoData={cryptoData} cryptoNames={cryptoNames} />
+      <Table cryptoData={cryptoData} cryptoNames={cryptoNames} isLoading={isLoading} />
     </section>
   )
 }

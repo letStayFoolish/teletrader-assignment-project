@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {navLinks} from "../../../utils/constants";
 import menu from '../../../assets/Icons/menu.svg'
 import close from '../../../assets/Icons/close.svg'
