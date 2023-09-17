@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className='w-full container text-center md:text-left  flex flex-col my-8'>
       <div className='flex md:flex-row flex-col md:justify-start'>
-        <div className="flex flex-col justify-start md:min-w-[300px] md:mr-10">
+        <div className="flex flex-col justify-start md:mr-5">
           <h3 className='text-[20px] font-medium text-teal-400 mb-2 hover:opacity-75 transition-all'>
             <a href="https://www.teletrader.rs/" target='_blank' rel='noopener noreferrer'>TeleTrader</a>
           </h3>
