@@ -20,11 +20,11 @@ const Table = ({ cryptoData, cryptoNames, isLoading }) => {
                 <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
                   <th scope="col" className="px-4 py-4">Name</th>
-                  <th scope="col" className="px-4 py-4 sm:text-center text-right">Last</th>
-                  <th scope="col" className="px-4 py-4 hidden text-center sm:table-cell">Change</th>
-                  <th scope="col" className="px-4 py-4 hidden text-center sm:table-cell w-[180px]">Change Percent</th>
-                  <th scope="col" className="px-4 py-4 hidden text-center md:table-cell">High</th>
-                  <th scope="col" className="px-4 py-4 hidden text-center xl:table-cell">Low</th>
+                  <th scope="col" className="px-4 py-4 text-center">Last</th>
+                  <th scope="col" className="px-4 py-4 text-center">Change</th>
+                  <th scope="col" className="px-4 py-4 text-center w-[180px]">Change Percent</th>
+                  <th scope="col" className="px-4 py-4 text-center">High</th>
+                  <th scope="col" className="px-4 py-4 text-center">Low</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,11 +39,11 @@ const Table = ({ cryptoData, cryptoNames, isLoading }) => {
                         onClick={() => handleOnClick(cryptoName)}
                         className="whitespace-nowrap px-4 py-4 font-medium flex gap-2 justify-start cryptos-center cursor-pointer"
                       >{cryptoName}</td>
-                      <td className="whitespace-nowrap px-4 py-4 sm:text-center text-right">{formatNumber(item.values.lastPrice)}</td>
-                      <td className={`whitespace-nowrap px-4 py-4 hidden text-center sm:table-cell ${formatNumber(item.values.change) > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{formatNumber(item.values.change)}</td>
-                      <td className={`whitespace-nowrap px-4 py-4 hidden text-center sm:table-cell ${formatNumber(item.values.changePercent) > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{formatNumber(item.values.changePercent)}%</td>
-                      <td className="whitespace-nowrap px-4 py-4 hidden text-center md:table-cell">{formatNumber(item.values.high)}</td>
-                      <td className="whitespace-nowrap px-4 py-4 hidden text-center xl:table-cell">{formatNumber(item.values.low)}</td>
+                      <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.lastPrice)}</td>
+                      <td className={`whitespace-nowrap px-4 py-4 text-center ${formatNumber(item.values.change) > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{formatNumber(item.values.change)}</td>
+                      <td className={`whitespace-nowrap px-4 py-4 text-center ${formatNumber(item.values.changePercent) > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{formatNumber(item.values.changePercent)}%</td>
+                      <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.high)}</td>
+                      <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.low)}</td>
                     </tr>
                   )
                 })}

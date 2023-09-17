@@ -30,7 +30,7 @@ const Details = ({ isLoggedIn }) => {
   const handleAddToFavorites = () => {
     setIsFavorite(true)
     // setFavoriteList([symbol, ...favoriteList])
-    handleSaveToLocalStorage('symbol', [...favoriteList, symbol]) // OK !!!
+    handleSaveToLocalStorage('symbol', [...favoriteList, symbol])
 
     const dataFromLocalStorage =  handleGetFromLocalStorage('symbol')
 
@@ -75,16 +75,16 @@ const Details = ({ isLoggedIn }) => {
               <tr>
                 <th scope="col" className="px-6 py-4">Symbol</th>
                 <th scope="col" className="px-6 py-4 text-center sm:text-left">Last Price</th>
-                <th scope="col" className="px-6 py-4 hidden xl:table-cell">High</th>
-                <th scope="col" className="px-6 py-4 hidden xl:table-cell">Low</th>
+                <th scope="col" className="px-6 py-4">High</th>
+                <th scope="col" className="px-6 py-4">Low</th>
               </tr>
               </thead>
               <tbody>
               <tr className="border-b dark:border-neutral-500">
-                <td className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center">{symbol}</td>
-                <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{formatNumber(fixedCryptoData.last)}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(fixedCryptoData.high)}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(fixedCryptoData.low)}</td>
+                <td className="whitespace-nowrap px-6 py-4 font-medium">{symbol}</td>
+                <td className="whitespace-nowrap px-6 py-4 text-center">{formatNumber(fixedCryptoData.last)}</td>
+                <td className="whitespace-nowrap px-6 py-4">{formatNumber(fixedCryptoData.high)}</td>
+                <td className="whitespace-nowrap px-6 py-4">{formatNumber(fixedCryptoData.low)}</td>
               </tr>
               </tbody>
             </table>
