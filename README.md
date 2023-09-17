@@ -14,7 +14,7 @@
     <a href="https://github.com/letStayFoolish/teletrader-assignment-project"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="teletrader-assignment-project.vercel.app">View Demo</a>
+    <a href="https://teletrader-assignment-project.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/letStayFoolish/teletrader-assignment-project/issues">Report Bug</a>
     ·
