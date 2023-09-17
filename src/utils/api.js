@@ -1,4 +1,3 @@
-import {BASE_URL} from "./constants";
 import axios from "axios";
 
 export const fetchFirst5Symbols = async () => {

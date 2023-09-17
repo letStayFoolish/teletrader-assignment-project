@@ -7,19 +7,19 @@ module.exports = function (app) {
       target: "https://api.bitfinex.com",
       changeOrigin: true,
       pathRewrite: {
-        '^/bitfinex-symbols': '/v1/symbols'
+        '^/bitfinex-symbols' : '/v1/symbols'
       }
     })
   );
 
-  app.use(
-    "/bitfinex-pubticker/*",
-    createProxyMiddleware({
-      target: "https://api.bitfinex.com",
-      changeOrigin: true,
-      pathRewrite: {
-        '^/bitfinex-pubticker': '/v1/pubticker'
-      }
-    })
-  );
+  // app.use(
+  //   "/bitfinex-pubticker/*",
+  //   createProxyMiddleware({
+  //     target: "https://api.bitfinex.com",
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/bitfinex-pubticker' : '/v1/pubticker'
+  //     }
+  //   })
+  // );
 };
