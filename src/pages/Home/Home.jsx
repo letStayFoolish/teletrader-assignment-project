@@ -10,7 +10,6 @@ const Home = () => {
   const handleGetSymbols = async () => {
     try {
       const response = await fetchFirst5Symbols()
-
       setSymbols(response)
 
     } catch (error) {
