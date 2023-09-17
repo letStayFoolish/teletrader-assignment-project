@@ -11,9 +11,8 @@ import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  const pathname = useLocation().pathname
-
+  // Solution with pathname, to hide header & footer if needed
+  // const pathname = useLocation().pathname
   // const routes = pathname === '/' || pathname === '/favorites' || pathname.startsWith('/details')
 
   const handleOnLogin = () => {
@@ -33,7 +32,10 @@ const App = () => {
         <Routes >
           <Route path='/' index={true} element={<Home isLoggedIn={isLoggedIn} />} />
           <Route path='/favorites' element={
-            <ProtectedRoute isLoggedIn={isLoggedIn} element={Favorites} />
+            <ProtectedRoute
+              isLoggedIn={isLoggedIn}
+              element={Favorites}
+            />
           }/>
           <Route path='/details/:symbol' element={<Details isLoggedIn={isLoggedIn} />} />
           <Route path='*' element={<NotFound />} />

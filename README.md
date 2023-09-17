@@ -190,7 +190,7 @@ This will generate optimized production files in the build directory.
 The application uses local storage to store and retrieve the following data:
 
  - `isLoggedIn`: A boolean value representing the user's logged-in status.
- - `favorites`: An array of cryptocurrency pairs that the user has added to their favorites list.
+ - `symbol`: An array of cryptocurrency pairs that the user has added to their favorites list.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

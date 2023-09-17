@@ -13,11 +13,11 @@ const Navbar = ({ isLoggedIn, handleOnLogin }) => {
   return (
     <nav className='flex py-6 justify-between items-center navbar m-0'>
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
-          <li
-            className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/` ? 'text-teal-400' : 'text-dimWhite'}`}
-          >
-            <Link to={`/`}>Home</Link>
-          </li>
+        <li
+          className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/` ? 'text-teal-400' : 'text-dimWhite'}`}
+        >
+          <Link to={`/`}>Home</Link>
+        </li>
         <li
           className={`font-normal cursor-pointer text-[16px] mr-10 hover:opacity-50 transition-all ${pathname === `/favorites` ? 'text-teal-400' : 'text-dimWhite'}`}
         >
@@ -39,17 +39,16 @@ const Navbar = ({ isLoggedIn, handleOnLogin }) => {
 
         <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-black-gradient absolute z-30 top-20 left-0 right-0 w-full rounded-xl sidebar`}>
           <ul className='list-none flex justify-end items-start flex-1 flex-col'>
-            {navLinks.map((nav) => (
-              <li
-                key={nav.id}
-                className={`font-medium cursor-pointer text-[16px] mb-5 last-of-type:mb-7 ${
-                  active === nav.title ? 'text-teal-400' : 'text-dimWhite'
-                } hover:opacity-50 transition-all mb-3`}
-                onClick={() => setActive(nav.title)}
-              >
-                <Link to={`/${nav.id}`}>{nav.title}</Link>
-              </li>
-            ))}
+            <li
+              className={`font-normal cursor-pointer text-[16px] mb-6 hover:opacity-50 transition-all ${pathname === `/` ? 'text-teal-400' : 'text-dimWhite'}`}
+            >
+              <Link to={`/`} onClick={() => setToggle(!toggle)}>Home</Link>
+            </li>
+            <li
+              className={`font-normal cursor-pointer text-[16px] hover:opacity-50 transition-all ${pathname === `/favorites` ? 'text-teal-400' : 'text-dimWhite'}`}
+            >
+              {isLoggedIn && <Link to={`/favorites`} onClick={() => setToggle(!toggle)}>Favorites</Link>}
+            </li>
             {!isLoggedIn && <Button text='Login' handleOnClick={handleOnLogin} />}
           </ul>
         </div>
