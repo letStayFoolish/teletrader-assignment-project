@@ -20,7 +20,8 @@ export const fetchFirst5Symbols = async () => {
 export const fetchSymbolData = async (symbol) => {
   try {
     // const response = await axios.get(`/bitfinex-pubticker/${symbol}`)
-    const response = await axios.get(`https://api.bitfinex.com/v1/pubticker/${symbol}`)
+    // const response = await axios.get(`https://api.bitfinex.com/v1/pubticker/${symbol}`)
+    const response = await axios.get(`https://api-pub.bitfinex.com/v2/ticker/${symbol}`)
 
 
     if (response.status === 200) {
