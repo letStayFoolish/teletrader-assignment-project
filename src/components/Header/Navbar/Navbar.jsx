@@ -9,6 +9,11 @@ const Navbar = ({ isLoggedIn, handleOnLogin }) => {
   const [toggle, setToggle] = useState(false)
   const pathname = useLocation().pathname
 
+  const handleOnClick = () => {
+    handleOnLogin()
+    setToggle(false)
+  }
+
 
   return (
     <nav className='flex py-6 justify-between items-center navbar m-0'>
@@ -49,7 +54,7 @@ const Navbar = ({ isLoggedIn, handleOnLogin }) => {
             >
               {isLoggedIn && <Link to={`/favorites`} onClick={() => setToggle(!toggle)}>Favorites</Link>}
             </li>
-            {!isLoggedIn && <Button text='Login' handleOnClick={handleOnLogin} />}
+            {!isLoggedIn && <Button text='Login' handleOnClick={handleOnClick} />}
           </ul>
         </div>
       </div>
