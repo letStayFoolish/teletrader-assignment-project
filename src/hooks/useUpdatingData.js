@@ -8,7 +8,7 @@ const useUpdatingData = (symbols) => {
 
 
   const handleInitialData = (data) => {
-    const { chanId: id, pair: crypto } = data
+    const { chanId, pair } = data
 
     const initialValues = {
       lastPrice: 0,
@@ -18,8 +18,8 @@ const useUpdatingData = (symbols) => {
       low: 0,
     }
 
-    setCryptoNames(prevState => [...prevState, { id: Number([id]), name: crypto }])
-    setCryptoData(prevState => [...prevState, { id: Number([id]), values: initialValues }])
+    setCryptoNames(prevState => [...prevState, { id: chanId, name: pair }])
+    setCryptoData(prevState => [...prevState, { id: chanId, values: initialValues }])
   }
 
   const handleUpdateData = (data) => {

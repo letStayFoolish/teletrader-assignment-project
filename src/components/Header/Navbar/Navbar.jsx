@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
-import {navLinks} from "../../../utils/constants";
 import menu from '../../../assets/Icons/menu.svg'
 import close from '../../../assets/Icons/close.svg'
 import Button from "../../Button/Button";
 import {Link, useLocation} from "react-router-dom";
 const Navbar = ({ isLoggedIn, handleOnLogin }) => {
-  const [active, setActive] = useState('Home')
   const [toggle, setToggle] = useState(false)
   const pathname = useLocation().pathname
 

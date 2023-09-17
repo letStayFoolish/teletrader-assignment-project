@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
+import {AuthContext} from "../../context/AuthContext";
 import Button from "../../components/Button/Button";
 import {useParams} from "react-router-dom";
 import {fetchSymbolData} from "../../utils/api";
 import {formatNumber, handleGetFromLocalStorage, handleSaveToLocalStorage} from "../../utils/utils";
-const Details = ({ isLoggedIn }) => {
+const Details = () => {
   const [removeFromFavorites, setRemoveFromFavorites] = useState(true)
   const [isFavorite, setIsFavorite] = useState(false)
   const [favoriteList, setFavoriteList] = useState([])
@@ -12,6 +13,8 @@ const Details = ({ isLoggedIn }) => {
     high: 0,
     low: 0,
   })
+
+  const isLoggedIn = useContext(AuthContext)
 
   let { symbol } = useParams()
 
@@ -23,7 +26,6 @@ const Details = ({ isLoggedIn }) => {
       last: Number(data.last_price),
       high: Number(data.high),
       low: Number(data.low),
-
     })
   }
 
@@ -35,8 +37,6 @@ const Details = ({ isLoggedIn }) => {
     const dataFromLocalStorage =  handleGetFromLocalStorage('symbol')
 
     setFavoriteList(dataFromLocalStorage)
-
-    console.log(dataFromLocalStorage)
   }
 
 
@@ -57,9 +57,6 @@ const Details = ({ isLoggedIn }) => {
 
     if (data?.includes(symbol)) {
       setIsFavorite(true)
-    } else {
-      setIsFavorite(false)
-      return
     }
 
     setFavoriteList(data)
@@ -70,11 +67,11 @@ const Details = ({ isLoggedIn }) => {
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 mt-[120px] mb-5">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
-            <table className="table-auto min-w-full text-left text-sm font-light swing-in-top-fwd">
+            <table className="table-auto min-w-full text-center text-sm font-light swing-in-top-fwd">
               <thead className="border-b font-medium dark:border-neutral-500">
               <tr>
                 <th scope="col" className="px-6 py-4">Symbol</th>
-                <th scope="col" className="px-6 py-4 text-center sm:text-left">Last Price</th>
+                <th scope="col" className="px-6 py-4">Last Price</th>
                 <th scope="col" className="px-6 py-4">High</th>
                 <th scope="col" className="px-6 py-4">Low</th>
               </tr>
@@ -82,7 +79,7 @@ const Details = ({ isLoggedIn }) => {
               <tbody>
               <tr className="border-b dark:border-neutral-500">
                 <td className="whitespace-nowrap px-6 py-4 font-medium">{symbol}</td>
-                <td className="whitespace-nowrap px-6 py-4 text-center">{formatNumber(fixedCryptoData.last)}</td>
+                <td className="whitespace-nowrap px-6 py-4">{formatNumber(fixedCryptoData.last)}</td>
                 <td className="whitespace-nowrap px-6 py-4">{formatNumber(fixedCryptoData.high)}</td>
                 <td className="whitespace-nowrap px-6 py-4">{formatNumber(fixedCryptoData.low)}</td>
               </tr>

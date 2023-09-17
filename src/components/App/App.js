@@ -6,7 +6,7 @@ import {handleGetFromLocalStorage, handleSaveToLocalStorage} from "../../utils/u
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import Favorites from "../../pages/Favorits/Favorites";
+import Favorites from "../../pages/Favorites/Favorites";
 import Details from "../../pages/Details/Details";
 import NotFound from "../NotFound/NotFound";
 
@@ -42,14 +42,14 @@ const App = () => {
         <Header isLoggedIn={isLoggedIn} handleOnLogin={handleOnLogin} />
         <main className='w-full flex-grow mb-auto container'>
           <Routes >
-            <Route path='/' index={true} element={<Home isLoggedIn={isLoggedIn} />} />
+            <Route path='/' index={true} element={<Home />} />
             <Route path='/favorites' element={
               <ProtectedRoute
                 element={<Favorites />}
                 isLoggedIn={isLoggedIn}
               />
             }/>
-            <Route path='/details/:symbol' element={<Details isLoggedIn={isLoggedIn} />} />
+            <Route path='/details/:symbol' element={<Details />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </main>
