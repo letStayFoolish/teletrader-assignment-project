@@ -3,17 +3,19 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import {useEffect, useState} from "react";
 import {fetchFirst5Symbols} from "../../utils/api";
+import {handleGetFromLocalStorage, handleSaveToLocalStorage} from "../../utils/utils";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const handleOnLogin = () => {
     setIsLoggedIn(true)
-    localStorage.setItem('isLoggedIn', true)
+    handleSaveToLocalStorage('isLoggedIn', true)
+    // localStorage.setItem()
   }
 
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('isLoggedIn'))
+    setIsLoggedIn(handleGetFromLocalStorage('isLoggedIn'))
   }, [isLoggedIn])
 
 

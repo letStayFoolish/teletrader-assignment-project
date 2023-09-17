@@ -21,9 +21,6 @@ export const fetchSymbolData = async (symbol) => {
   try {
     const response = await axios.get(`https://try.readme.io/https://api.bitfinex.com/v1/pubticker/${symbol}`)
 
-    // console.log(symbol)
-    // console.log(response)
-
     if (response.status === 200) {
       return response
     } else {

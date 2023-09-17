@@ -30,6 +30,8 @@ const Details = ({ isLoggedIn }) => {
     })
   }
 
+
+
   useEffect(() => {
     handleFetchData()
   }, []);

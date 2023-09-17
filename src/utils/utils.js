@@ -26,3 +26,13 @@ export function formatNumber(number) {
   const regex = /\B(?=(\d{3})+(?!\d))/g;
   return formattedNumber.replace(regex, ',')
 }
+
+
+export const handleSaveToLocalStorage = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data))
+}
+
+export const handleGetFromLocalStorage = (key) => {
+  const data = localStorage.getItem(key)
+  return data ? JSON.parse(data) : null;
+}
