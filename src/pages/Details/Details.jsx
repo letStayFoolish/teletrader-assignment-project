@@ -55,7 +55,7 @@ const Details = ({ isLoggedIn }) => {
     handleFetchData()
     const data = handleGetFromLocalStorage('symbol')
 
-    if (data.includes(symbol)) {
+    if (data?.includes(symbol)) {
       setIsFavorite(true)
     } else {
       setIsFavorite(false)
