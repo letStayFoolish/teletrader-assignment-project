@@ -106,19 +106,19 @@ export const footerLinks = [
       },
     ],
   },
-  {
-    title: "Partner",
-    links: [
-      {
-        name: "Our Partner",
-        link: "https://www.teletrader.rs/",
-      },
-      {
-        name: "Become a Partner",
-        link: "https://www.teletrader.rs/",
-      },
-    ],
-  },
+  // {
+  //   title: "Partner",
+  //   links: [
+  //     {
+  //       name: "Our Partner",
+  //       link: "https://www.teletrader.rs/",
+  //     },
+  //     {
+  //       name: "Become a Partner",
+  //       link: "https://www.teletrader.rs/",
+  //     },
+  //   ],
+  // },
 ];
 
 export const socialMedia = [

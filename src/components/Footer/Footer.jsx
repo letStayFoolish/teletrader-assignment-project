@@ -10,9 +10,9 @@ const Footer = () => {
           <p className='uppercase font-normal text-base mb-2 tracking-out-expand'>A step ahead of market</p>
         </div>
 
-        <div className='hidden md:flex flex-1 justify-between md:mt-0 mt-10 mb-4'>
+        <div className='hidden md:flex flex-1 justify-end md:mt-0 mt-10 mb-4'>
             {footerLinks.map((link, _index) => (
-              <div key={_index} className='flex flex-col sm:my-0 my-4 min-w-[150px]'>
+              <div key={_index} className='flex flex-col sm:my-0 my-4 mr-16 last:mr-0'>
                 <h4 className='font-medium text-[18px] leading-[27px]'>{link.title}</h4>
 
                 <ul className='list-none mt-4'>

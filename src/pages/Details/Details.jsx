@@ -59,6 +59,7 @@ const Details = ({ isLoggedIn }) => {
       setIsFavorite(true)
     } else {
       setIsFavorite(false)
+      return
     }
 
     setFavoriteList(data)
