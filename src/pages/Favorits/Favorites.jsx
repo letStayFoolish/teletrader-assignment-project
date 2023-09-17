@@ -6,15 +6,13 @@ import {handleGetFromLocalStorage} from "../../utils/utils";
 const Favorites = () => {
   const [symbols, setSymbols] = useState([])
   const { cryptoData, cryptoNames, isLoading } = useUpdatingData(symbols)
-  const [noData, setNoData] = useState(false)
 
 
   useEffect(() => {
     const data = handleGetFromLocalStorage('symbol')
+
     if (data) {
       setSymbols(data)
-    } else {
-
     }
   }, []);
 
