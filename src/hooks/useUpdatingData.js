@@ -5,6 +5,7 @@ const useUpdatingData = (symbols) => {
   const [cryptoData, setCryptoData] = useState([])
   const [cryptoNames, setCryptoNames] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  // const [transition, setTransition] = useState(false)
 
 
   const handleInitialData = (data) => {
@@ -71,8 +72,10 @@ const useUpdatingData = (symbols) => {
 
       if (data?.event === 'subscribed') {
         handleInitialData(data)
+        // setTransition(false)
       } else if (Array.isArray(data) && data[1].length === 10) {
         handleUpdateData(data)
+        // setTransition(true)
       }
       setIsLoading(false)
 

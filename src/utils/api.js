@@ -3,8 +3,7 @@ import axios from "axios";
 
 export const fetchFirst5Symbols = async () => {
   try {
-    const response = await axios.get(`https://try.readme.io/https://api.bitfinex.com/v1/symbols`)
-    // const response = await axios.get(`https://api.bitfinex.com/v1/symbols`)
+    const response = await axios.get(`/bitfinex-symbols`)
 
     if (response.status === 200) {
       const symbolList = await response.data.slice(0, 5).map(symbol => symbol.toUpperCase())
@@ -20,7 +19,7 @@ export const fetchFirst5Symbols = async () => {
 
 export const fetchSymbolData = async (symbol) => {
   try {
-    const response = await axios.get(`https://try.readme.io/https://api.bitfinex.com/v1/pubticker/${symbol}`)
+    const response = await axios.get(`/bitfinex-pubticker/${symbol}`)
 
     if (response.status === 200) {
       return response
