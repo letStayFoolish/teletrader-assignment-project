@@ -36,7 +36,7 @@ const Footer = () => {
 
       <div className='w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3f3e45]'>
         <p className='font-normal text-center text-[14px] leading-[16px] mb-3 md:mb-0'>
-          Copyright Ⓒ 2023 TaleTrader. All Rights Reserved.
+          Copyright Ⓒ 2023 TeleTrader. All Rights Reserved.
         </p>
         <p className='font-normal text-center text-[14px] leading-[16px]'>
           Coded by <strong>Nemanja Karaklajic</strong>
