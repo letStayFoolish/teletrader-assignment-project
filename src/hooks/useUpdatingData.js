@@ -1,130 +1,89 @@
-// import { useEffect, useState } from "react";
-//
-// const useUpdatingData = (symbols) => {
-//   const [currencyData, setCurrencyData] = useState([])
-//   const [currencySymbols, setCurrencySymbols] = useState([])
-//   const [isLoaded, setIsLoaded] = useState(false)
-//
-//   const subscribedHandler = (responseData) => {
-//     const { chanId: id, pair: crypto } = responseData
-//
-//     const initialValues = {
-//       last: 0,
-//       change: 0,
-//       changePercent: 0,
-//       high: 0,
-//       low: 0,
-//     }
-//
-//     setCurrencySymbols((prevState) => [...prevState, { id: Number([id]), name: crypto }])
-//     setCurrencyData((prevState) => [...prevState, { id: Number([id]), values: initialValues }])
-//   }
-//
-//   const handleUpdate = (responseData) => {
-//     const id = responseData[0]
-//     const resultList = responseData[1]
-//
-//     const newValues = {
-//       last: resultList[6],
-//       change: resultList[4],
-//       changePercent: resultList[5],
-//       high: resultList[8],
-//       low: resultList[9],
-//     }
-//
-//     setCurrencyData(prevState => {
-//       const
-//     })
-//   }
-// }
-
 import { useEffect, useState } from "react";
+import WebSocket from "websocket";
 
-const UPDATED_RESULTS_COUNT = 10;
+const useUpdatingData = (symbols) => {
+  const [cryptoData, setCryptoData] = useState([])
+  const [cryptoNames, setCryptoNames] = useState([])
 
-function useUpdatingData(symbols) {
-  const [cryptoData, setCryptoData] = useState([]);
-  const [cryptoNames, setCryptoNames] = useState([]);
-  const [resultsLoaded, setResultsLoaded] = useState(false);
-
-  function subscribedHandler(responseData) {
-    const { chanId: id, pair: crypto } = responseData;
+  const handleInitialData = (data) => {
+    const { chanId: id, pair: crypto } = data
 
     const initialValues = {
       lastPrice: 0,
-      dailyChange: 0,
-      dailyChangePercent: 0,
-      dailyHigh: 0,
-      dailyLow: 0,
-    };
+      change: 0,
+      changePercent: 0,
+      high: 0,
+      low: 0,
+    }
 
-    setCryptoNames((prevCryptoNames) => [...prevCryptoNames, { id: Number([id]), name: crypto }]);
-    setCryptoData((prevData) => [...prevData, { id: Number([id]), values: initialValues }]);
+    setCryptoNames(prevState => [...prevState, { id: Number([id]), name: crypto }])
+    setCryptoData(prevState => [...prevState, { id: Number([id]), values: initialValues }])
   }
 
-  function updatedResultsHandler(responseData) {
-    const id = responseData[0];
-    const resultList = responseData[1];
+  const handleUpdateData = (data) => {
+    const id = data[0]
 
-    const newValues = {
-      lastPrice: resultList[6],
-      dailyChange: resultList[4],
-      dailyChangePercent: resultList[5],
-      dailyHigh: resultList[8],
-      dailyLow: resultList[9],
-    };
+    const updatedValues = {
+      lastPrice: data[1][6],
+      change: data[1][4],
+      changePercent: data[1][5],
+      high: data[1][8],
+      low: data[1][9],
+    }
 
-    setCryptoData((prevData) => {
-      const updatedData = [...prevData];
-      const existingIndex = updatedData.findIndex((item) => item.id === id);
+    setCryptoData((prevState) => {
+      const currentData = [...prevState]
+      const index = currentData.findIndex(item => item.id === id)
 
-      if (existingIndex === -1) {
-        return updatedData;
+      if (index === -1) {
+        return currentData
       } else {
-        updatedData[existingIndex] = { id: Number([id]), values: newValues };
-        return updatedData;
+        currentData[index] = { id: Number([id]), values: updatedValues }
+        return currentData
       }
-    });
+    })
   }
 
   useEffect(() => {
     if (!symbols) {
-      return;
+      return
     }
-    const webSocket = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
 
-    webSocket.onmessage = (message) => {
-      const responseData = JSON.parse(message.data);
+    const ws = new WebSocket.w3cwebsocket('wss://api-pub.bitfinex.com/ws/2')
 
-      if (responseData?.event === "subscribed") {
-        subscribedHandler(responseData);
-      } else if (Array.isArray(responseData) && responseData[1].length === UPDATED_RESULTS_COUNT) {
-        updatedResultsHandler(responseData);
-      }
-
-      setResultsLoaded(true);
-    };
-
-    webSocket.onopen = () => {
-      symbols.forEach((symbol) => {
+    ws.onopen = () => {
+      symbols.forEach(symbol => {
         const payload = JSON.stringify({
-          event: "subscribe",
-          channel: "ticker",
-          symbol: `t${symbol}`,
-        });
+          event: 'subscribe',
+          channel: 'ticker',
+          symbol: `t${symbol}`
+        })
+        ws.send(payload)
+      })
+    }
 
-        webSocket.send(payload);
-      });
-    };
+    ws.onmessage = (message) => {
+      const data = JSON.parse(message.data)
+
+      if (data?.event === 'subscribed') {
+        handleInitialData(data)
+      } else if (Array.isArray(data) && data[1].length === 10) {
+        handleUpdateData(data)
+      }
+      // console.log(data)
+    }
+
+    ws.onclose = () => {
+      console.log('WebSocket connection closed')
+    }
 
     return () => {
-      if (webSocket.readyState === 1) {
-        webSocket.close();
-      }
-    };
+      ws.close()
+    }
+
   }, [symbols]);
 
-  return { cryptoData, cryptoNames, resultsLoaded };
+  return { cryptoData, cryptoNames }
 }
 
 export default useUpdatingData;

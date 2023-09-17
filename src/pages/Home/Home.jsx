@@ -5,13 +5,13 @@ import useUpdatingData from "../../hooks/useUpdatingData";
 
 const Home = () => {
   const [symbols, setSymbols] = useState([])
-  const { cryptoData, cryptoNames, resultsLoaded } = useUpdatingData(symbols)
+  const { cryptoData, cryptoNames } = useUpdatingData(symbols)
 
   const handleGetSymbols = async () => {
     try {
-      const symbolList = await fetchFirst5Symbols()
-
-      setSymbols(symbolList.map(symbol => symbol.toUpperCase()))
+      const response = await fetchFirst5Symbols()
+      const symbolList = await response.data.slice(0, 5).map(symbol => symbol.toUpperCase())
+      setSymbols(symbolList)
 
     } catch (error) {
       console.error('Error:', error.message)
@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <section className='my-[120px]'>
-      <Table cryptoData={cryptoData} cryptoNames={cryptoNames} resultsLoaded={resultsLoaded} />
+      <Table cryptoData={cryptoData} cryptoNames={cryptoNames} />
     </section>
   )
 }

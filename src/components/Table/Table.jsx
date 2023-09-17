@@ -2,7 +2,7 @@ import React from 'react'
 import {currencyItems} from '../../utils/constants'
 import {useNavigate} from "react-router-dom";
 
-const Table = ({ cryptoData, cryptoNames, resultsLoaded }) => {
+const Table = ({ cryptoData, cryptoNames }) => {
   const navigate = useNavigate()
   const handleOnClick = (symbol) => {
     navigate(`/details/${symbol}`)
@@ -27,22 +27,25 @@ const Table = ({ cryptoData, cryptoNames, resultsLoaded }) => {
             </tr>
             </thead>
             <tbody>
-            {currencyItems?.map((item, _index) => (
-              <tr
-                onClick={() => handleOnClick(item.name)}
-                key={_index}
-                className="border-b dark:border-neutral-500 cursor-pointer hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
-                <td
+            {cryptoData?.map((item, _index) => {
+              const cryptoName = cryptoNames.find(i => i.id === item.id).name
 
-                  className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center"
-                >{item.name}</td>
-                <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{item.last}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden sm:table-cell">{item.change}</td>
-                <td className={`whitespace-nowrap px-6 py-4 hidden sm:table-cell ${item.changePercent > 0 ? 'text-green-800' : 'accent-red-800' } `}>{item.changePercent}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.high}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.low}</td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  // onClick={() => handleOnClick(item.name)}
+                  key={_index}
+                  className="border-b dark:border-neutral-500 cursor-pointer hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
+                  <td
+                    className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start cryptos-center"
+                  >{cryptoName}</td>
+                  <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{item.values.lastPrice}</td>
+                  <td className={`whitespace - nowrap px-6 py-4 hidden sm:table-cell ${item.values.change > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{item.values.change}</td>
+                  <td className={`whitespace-nowrap px-6 py-4 hidden sm:table-cell ${item.values.changePercent > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{item.values.changePercent}</td>
+                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.values.high}</td>
+                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.values.low}</td>
+                </tr>
+              )
+            })}
             </tbody>
           </table>
         </div>

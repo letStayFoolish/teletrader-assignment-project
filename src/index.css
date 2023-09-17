@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    font-family: 'Raleway', sans-serif;
+
+    font-family: 'Montserrat', sans-serif;
 
     --black-gradient: linear-gradient(
         144.39deg,
