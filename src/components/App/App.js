@@ -3,7 +3,7 @@ import {AuthContext} from "../../context/AuthContext";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import {handleGetFromLocalStorage, handleSaveToLocalStorage} from "../../utils/utils";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Favorites from "../../pages/Favorits/Favorites";
@@ -12,8 +12,9 @@ import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  const pathname = useLocation().pathname
   // Solution with pathname, to hide header & footer if needed
-  // const pathname = useLocation().pathname
   // const routes = pathname === '/' || pathname === '/favorites' || pathname.startsWith('/details')
 
 
@@ -24,7 +25,14 @@ const App = () => {
 
   useEffect(() => {
     const state = handleGetFromLocalStorage('isLoggedIn')
-    setIsLoggedIn(state)
+
+    if (state) {
+      setIsLoggedIn(state)
+      navigate(pathname)
+    } else {
+      setIsLoggedIn(false)
+    }
+
   }, [isLoggedIn])
 
   return (
