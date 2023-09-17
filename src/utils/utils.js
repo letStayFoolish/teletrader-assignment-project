@@ -18,13 +18,16 @@ export function formatNumber(number) {
   if (typeof number !== 'number' && isNaN(number)) {
     return 'Invalid input'
   }
+  const formattedNumber = new Intl.NumberFormat('en-US', { maximumFractionDigits: 10 }).format(number);
+  return formattedNumber
+
 
   // Format the number with two decimal places
-  const formattedNumber = number.toFixed(2)
-
+  // const formattedNumber = number.toFixed(6)
+  //
   // Use regular expression to add thousands separators
-  const regex = /\B(?=(\d{3})+(?!\d))/g;
-  return formattedNumber.replace(regex, ',')
+  // const regex = /\B(?=(\d{3})+(?!\d))/g;
+  // return formattedNumber.replace(regex, ',')
 }
 
 

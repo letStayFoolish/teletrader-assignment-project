@@ -10,8 +10,8 @@ const Home = () => {
   const handleGetSymbols = async () => {
     try {
       const response = await fetchFirst5Symbols()
-      const symbolList = await response.data.slice(0, 5).map(symbol => symbol.toUpperCase())
-      setSymbols(symbolList)
+
+      setSymbols(response)
 
     } catch (error) {
       console.error('Error:', error.message)

@@ -7,7 +7,8 @@ export const fetchFirst5Symbols = async () => {
     // const response = await axios.get(`https://api.bitfinex.com/v1/symbols`)
 
     if (response.status === 200) {
-      return response
+      const symbolList = await response.data.slice(0, 5).map(symbol => symbol.toUpperCase())
+      return symbolList
     } else {
       console.error('Failed to fetch data: ', response.status, response.statusText)
     }

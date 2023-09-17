@@ -34,14 +34,14 @@ const Table = ({ cryptoData, cryptoNames, isLoading }) => {
                   return (
                     <tr
                       key={_index}
-                      className="border-b dark:border-neutral-500 hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
+                      className="border-b dark:border-neutral-500 hover:opacity-75 hover:bg-teal-600 transition-all hover:text-white flip-in-hor-bottom">
                       <td
                         onClick={() => handleOnClick(cryptoName)}
                         className="whitespace-nowrap px-4 py-4 font-medium flex gap-2 justify-start cryptos-center cursor-pointer"
                       >{cryptoName}</td>
                       <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.lastPrice)}</td>
-                      <td className={`whitespace-nowrap px-4 py-4 text-center ${formatNumber(item.values.change) > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{formatNumber(item.values.change)}</td>
-                      <td className={`whitespace-nowrap px-4 py-4 text-center ${formatNumber(item.values.changePercent) > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{formatNumber(item.values.changePercent)}%</td>
+                      <td className={`whitespace-nowrap px-4 py-4 text-center fade-in ${formatNumber(item.values.change) > 0.0 ? 'text-green-500' : 'text-red-600' }`}>{formatNumber(item.values.change)}</td>
+                      <td className={`whitespace-nowrap px-4 py-4 text-center fade-in ${formatNumber(item.values.changePercent) > 0.0 ? 'text-green-500' : 'text-red-600' } `}>{formatNumber(item.values.changePercent)}%</td>
                       <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.high)}</td>
                       <td className="whitespace-nowrap px-4 py-4 text-center">{formatNumber(item.values.low)}</td>
                     </tr>
