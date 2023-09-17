@@ -1,6 +1,6 @@
 import React from 'react'
-import {currencyItems} from '../../utils/constants'
 import {useNavigate} from "react-router-dom";
+import {formatNumber} from "../../utils/utils";
 
 const Table = ({ cryptoData, cryptoNames }) => {
   const navigate = useNavigate()
@@ -32,17 +32,17 @@ const Table = ({ cryptoData, cryptoNames }) => {
 
               return (
                 <tr
-                  // onClick={() => handleOnClick(item.name)}
+                  onClick={() => handleOnClick(cryptoName)}
                   key={_index}
                   className="border-b dark:border-neutral-500 cursor-pointer hover:opacity-75 hover:bg-teal-500 transition-all hover:text-white flip-in-hor-bottom">
                   <td
                     className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start cryptos-center"
                   >{cryptoName}</td>
-                  <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{item.values.lastPrice}</td>
-                  <td className={`whitespace - nowrap px-6 py-4 hidden sm:table-cell ${item.values.change > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{item.values.change}</td>
-                  <td className={`whitespace-nowrap px-6 py-4 hidden sm:table-cell ${item.values.changePercent > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{item.values.changePercent}</td>
-                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.values.high}</td>
-                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{item.values.low}</td>
+                  <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{formatNumber(item.values.lastPrice)}</td>
+                  <td className={`whitespace - nowrap px-6 py-4 hidden sm:table-cell ${formatNumber(item.values.change) > 0.0 ? 'text-green-800' : 'text-red-700' }`}>{formatNumber(item.values.change)}</td>
+                  <td className={`whitespace-nowrap px-6 py-4 hidden sm:table-cell ${formatNumber(item.values.changePercent) > 0.0 ? 'text-green-800' : 'text-red-700' } `}>{formatNumber(item.values.changePercent)}%</td>
+                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(item.values.high)}</td>
+                  <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(item.values.low)}</td>
                 </tr>
               )
             })}

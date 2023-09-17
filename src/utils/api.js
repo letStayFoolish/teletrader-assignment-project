@@ -17,9 +17,12 @@ export const fetchFirst5Symbols = async () => {
   }
 }
 
-export const fetchSymbolData = async ({ symbol }) => {
+export const fetchSymbolData = async (symbol) => {
   try {
-    const response = await axios.get(`https://api.bitfinex.com/v1/pubticker/${symbol}`)
+    const response = await axios.get(`https://try.readme.io/https://api.bitfinex.com/v1/pubticker/${symbol}`)
+
+    // console.log(symbol)
+    // console.log(response)
 
     if (response.status === 200) {
       return response

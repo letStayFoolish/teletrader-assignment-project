@@ -1,14 +1,38 @@
-import React, {useState} from 'react'
-import icon from "../../assets/Icons/icon-01.png";
-import {currencyItems} from '../../utils/constants'
+import React, {useEffect, useState} from 'react'
 import Button from "../../components/Button/Button";
+import {useParams} from "react-router-dom";
+import {fetchSymbolData} from "../../utils/api";
+import {formatNumber} from "../../utils/utils";
 const Details = ({ isLoggedIn }) => {
   const [removeFromFavorites, setRemoveFromFavorites] = useState(true)
   const [favorites, setFavorites] = useState(false)
+  const [fixedCryptoData, setFixedCryptoData] = useState({
+    last: 0,
+    high: 0,
+    low: 0,
+  })
+
+  let { symbol } = useParams()
 
   const handleFavorites = () => {
     setFavorites(!favorites)
   }
+
+  const handleFetchData = async () => {
+    const response = await fetchSymbolData(symbol)
+    const data = await response.data
+
+    setFixedCryptoData({
+      last: Number(data.last_price),
+      high: Number(data.high),
+      low: Number(data.low),
+
+    })
+  }
+
+  useEffect(() => {
+    handleFetchData()
+  }, []);
 
   return (
     <section>
@@ -26,12 +50,10 @@ const Details = ({ isLoggedIn }) => {
               </thead>
               <tbody>
               <tr className="border-b dark:border-neutral-500">
-                <td className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center">
-                  <img src={icon} alt="Currency logo" className='object-contain h-[25px] w-[25px]'/>
-                  {currencyItems[0].name}</td>
-                <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{currencyItems[0].last}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{currencyItems[0].high}</td>
-                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{currencyItems[0].low}</td>
+                <td className="whitespace-nowrap px-6 py-4 font-medium flex gap-2 justify-start items-center">{symbol}</td>
+                <td className="whitespace-nowrap px-6 py-4 text-center sm:text-left">{formatNumber(fixedCryptoData.last)}</td>
+                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(fixedCryptoData.high)}</td>
+                <td className="whitespace-nowrap px-6 py-4 hidden xl:table-cell">{formatNumber(fixedCryptoData.low)}</td>
               </tr>
               </tbody>
             </table>
