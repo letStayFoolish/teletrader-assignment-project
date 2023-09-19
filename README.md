@@ -9,17 +9,27 @@
 
 <h3 align="center">Crypto Currency Monitoring</h3>
 
-  <p align="center">
-    <br />
-    <a href="https://github.com/letStayFoolish/teletrader-assignment-project"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://teletrader-assignment-project.vercel.app/">View Demo</a>
-    ·
-    <a href="https://github.com/letStayFoolish/teletrader-assignment-project/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/letStayFoolish/teletrader-assignment-project/issues">Request Feature</a>
-  </p>
+[//]: # (  <p align="center">)
+
+[//]: # (    <br />)
+
+[//]: # (    <a href="https://github.com/letStayFoolish/teletrader-assignment-project"><strong>Explore the docs »</strong></a>)
+
+[//]: # (    <br />)
+
+[//]: # (    <br />)
+
+[//]: # (    <a href="https://teletrader-assignment-project.vercel.app/">View Demo</a>)
+
+[//]: # (    ·)
+
+[//]: # (    <a href="https://github.com/letStayFoolish/teletrader-assignment-project/issues">Report Bug</a>)
+
+[//]: # (    ·)
+
+[//]: # (    <a href="https://github.com/letStayFoolish/teletrader-assignment-project/issues">Request Feature</a>)
+
+[//]: # (  </p>)
 </div>
 
 
